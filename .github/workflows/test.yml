@@ -13,3 +13,14 @@ jobs:
 
       - name: Run Lint
         run: yarn lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run Lint
+        run: yarn run test
