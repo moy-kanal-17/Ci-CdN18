@@ -11,9 +11,10 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Run Lint
+      - name: lint tekshirish
         run: yarn lint
   test:
+    needs: [lint]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Run Test
+      - name: Test tekshirish
         env:
           PORT: ${{secrets.PORT}}
         run: yarn run test
