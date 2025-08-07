@@ -1,0 +1,6 @@
+FROM node:alpine as builder
+WORKDIR /app
+ADD package*.json ./
+RUN yarn install
+ADD . .
+RUN yarn run build --prod
