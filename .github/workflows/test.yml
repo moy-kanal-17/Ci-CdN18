@@ -1,4 +1,5 @@
 name: Check
+
 on: push
 
 jobs:
@@ -11,18 +12,21 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: lint tekshirish
+      - name: Lint tekshirish
         run: yarn lint
+
   test:
     needs: [lint]
     strategy:
       matrix:
-        version: [18, 20]
+        version: [18, 20]  # 12 ni olib tashlash tavsiya qilinadi, EOL bo‘lgani uchun
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{matrix.version}}
+          node-version: ${{ matrix.version }}
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -31,5 +35,5 @@ jobs:
 
       - name: Test tekshirish
         env:
-          PORT: ${{secrets.PORT}}
-        run: yarn run test
+          PORT: ${{ secrets.PORT }}
+        run: yarn test
