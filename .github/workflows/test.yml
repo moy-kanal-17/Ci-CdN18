@@ -19,7 +19,7 @@ jobs:
     needs: [lint]
     strategy:
       matrix:
-        version: [18, 20]  # 12 ni olib tashlash tavsiya qilinadi, EOL bo‘lgani uchun
+        version: [18, 20]  # Node.js 12 olib tashlandi
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node.js
