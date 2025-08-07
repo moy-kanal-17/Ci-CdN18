@@ -27,6 +27,7 @@ jobs:
       - name: Build and Push
         uses: docker/build-push-action@v6
         with:
-          file: Dockerfile
+          context: .
+          file: ./Dockerfile
           push: true
           tags: ${{ vars.DOCKERHUB_USERNAME }}/cicd18:1.0
