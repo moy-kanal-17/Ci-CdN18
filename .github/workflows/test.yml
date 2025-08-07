@@ -1,0 +1,12 @@
+name: Check
+on: push
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chechout
+        uses: actions/checkout@v4
+      - name: Install
+        run: npm ci
+      - name: Lint Tekshirish
+        run: npm run lint 
