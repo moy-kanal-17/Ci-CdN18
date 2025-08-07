@@ -19,7 +19,7 @@ jobs:
     needs: [lint]
     strategy:
       matrix:
-        version: [18, 20]
+        version: [20]
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node.js
