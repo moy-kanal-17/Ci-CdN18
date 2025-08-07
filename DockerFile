@@ -1,13 +1,28 @@
-FROM node:alpine as builder
+# Build bosqichi
+FROM node:alpine AS builder
 WORKDIR /app
+
+# Paket fayllarni qo‘shish va o‘rnatish
 ADD package*.json ./
 RUN yarn install
-ADD . .
-RUN yarn run build --prod
 
+# Barcha fayllarni qo‘shish va build qilish
+ADD . .
+RUN yarn build
+
+# Production bosqichi
 FROM node:alpine
 WORKDIR /app
-COPY --from=builder /app/dist/ ./dist
-ADD package.json ./
-RUN yarn install --omit=dev
-CMD ["node","./dist/main.js"]
+
+# Build qilingan fayllarni ko‘chirish
+COPY --from=builder /app/dist ./dist
+COPY package.json ./
+
+# Faqat production dependencylarni o‘rnatish
+RUN yarn install --production
+
+# Port (agar kerak bo‘lsa)
+EXPOSE 3000
+
+# Ishga tushirish
+CMD ["node", "./dist/main.js"]
