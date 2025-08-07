@@ -20,7 +20,7 @@ COPY package.json ./
 
 # Faqat production dependencylarni o‘rnatish
 RUN yarn install --production
-
+ 
 # Port (agar kerak bo‘lsa)
 EXPOSE 3000
 
