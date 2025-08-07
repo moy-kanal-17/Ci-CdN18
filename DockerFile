@@ -4,3 +4,10 @@ ADD package*.json ./
 RUN yarn install
 ADD . .
 RUN yarn run build --prod
+
+FROM node:alpine
+WORKDIR /app
+COPY --from=builder /app/dist/ ./dist
+ADD package.json ./
+RUN yarn install --omit=dev
+CMS ["node","./dist/main.js"]
